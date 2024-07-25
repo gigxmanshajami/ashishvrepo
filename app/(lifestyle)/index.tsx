@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { GStyle } from '../components/styles/Global';
 import { Colors } from '../components/styles/Colours';
-
+import { router } from 'expo-router';
 const LifestylePage = () => {
   const navigation = useNavigation();
   const [selectedButton, setSelectedButton] = useState(null);
@@ -17,7 +17,8 @@ const LifestylePage = () => {
   });
 
   const navigateBack = () => {
-    navigation.goBack();
+    // navigation.goBack();
+    router.back();
   };
 
   const refreshPage = () => {
@@ -32,9 +33,18 @@ const LifestylePage = () => {
 
   const handleImagePress = (title, image) => {
     if (title === 'Gaming Influencer') {
-      navigation.navigate('Production', { profileData: image });
+      router.navigate({
+        pathname: 'production/index', params: {
+          profileData: image
+        }
+      });
     } else {
-      navigation.navigate('Profile', { profileData: image });
+      router.navigate({
+        pathname: 'profile/index', params: {
+          profileData: image
+        }
+      });
+      // router.navigate('', { profileData: image });
     }
   };
 
@@ -219,7 +229,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   imageWrapper: {
-    flexBasis: '48%', 
+    flexBasis: '48%',
     marginBottom: 10,
   },
   selectedButton: {

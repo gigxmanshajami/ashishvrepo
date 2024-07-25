@@ -1,20 +1,35 @@
-// // _layout.jsx
-// import React, { useContext } from 'react';
-// import { View, TouchableOpacity, Text } from 'react-native';
-// import { ThemeContext } from './ThemeContext'; // Adjust path if necessary
+import React, { useEffect } from 'react';
+import { useFonts } from 'expo-font';
+import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
-// const Layout = () => {
-//   const { toggleTheme } = useContext(ThemeContext);
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
-//   return (
-//     <View>
-//       {/* Your layout components */}
-//       <TouchableOpacity onPress={toggleTheme}>
-//         <Text>Toggle Theme</Text>
-//       </TouchableOpacity>
-//       {/* Other components */}
-//     </View>
-//   );
-// };
+export default function RootLayout() {
+    const colorScheme = useColorScheme();
+    const [fontsLoaded] = useFonts({
+        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    });
 
-// export default Layout;
+    useEffect(() => {
+        if (fontsLoaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
+    return (
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(searchpage)/index" />
+            <Stack.Screen name="(lifestyle)/index" />
+            <Stack.Screen name="profile/index" />
+            <Stack.Screen name="production/index" />
+            <Stack.Screen name="(reelpage)/index" />
+        </Stack>
+    );
+}

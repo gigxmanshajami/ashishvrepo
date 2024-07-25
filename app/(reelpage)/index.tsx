@@ -2,11 +2,12 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { Colors } from '../components/styles/Colours';
 
 const { height } = Dimensions.get('window');
 
-const ReelPage = ({ navigation }) => {
+const ReelPage = () => {
     return (
         <ScrollView 
             style={styles.container} 
@@ -17,7 +18,7 @@ const ReelPage = ({ navigation }) => {
             {[...Array(5)].map((_, index) => (
                 <View key={index} style={styles.reelContainer}>
                     <View style={styles.topSection}>
-                        <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <TouchableOpacity onPress={() => router.back()}>
                             <Ionicons name="arrow-down" size={24} color={Colors.white} />
                         </TouchableOpacity>
                         <Text style={styles.headerText}>Reel</Text>

@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import Group20Image from '../assets/images/Group 20.png';
 import Group18Image from '../assets/images/Group 18.png';
 import RectangleImage from '../assets/images/Rectangle.png';
-
+import { router } from 'expo-router';
 
 
 const SearchPage = () => {
@@ -99,13 +99,13 @@ const SearchPage = () => {
             <FontAwesome name="sort" size={16} color="white" />
             <Text style={styles.filterButtonText}>Sort</Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             style={[
               styles.button,
               selectedButton === 'Lifestyle' ? styles.selectedButton : styles.unselectedButton
             ]}
-            onPress={() => navigation.navigate('LifestylePage')}
+            onPress={() => router.navigate('(lifestyle)/index')}
           >
             <Text style={selectedButton === 'Lifestyle' ? styles.selectedButtonText : styles.unselectedButtonText}>
               Lifestyle

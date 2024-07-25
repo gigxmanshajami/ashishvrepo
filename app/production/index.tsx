@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { GStyle } from '../components/styles/Global';
 import { Colors } from '../components/styles/Colours';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { router } from 'expo-router';
 
 const ProductionPage = () => {
-    const navigation = useNavigation();
-    const [selectedButton, setSelectedButton] = React.useState(null);
+    const [selectedButton, setSelectedButton] = useState(null);
 
     // const handleButtonPress = (button) => {
     //     setSelectedButton(button);
@@ -17,18 +15,15 @@ const ProductionPage = () => {
         setSelectedButton(button);
         // Navigate to ReelPage when 'Brands' button is pressed
         if (button === 'Brands') {
-            navigation.navigate('ReelPage');
+            router.navigate('(reelpage)/index');
         }
     };
-    
-    // const handleClickPress = () => {
-    //     navigation.navigate('ReelPage');
-    // };
+
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.topSection}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <TouchableOpacity onPress={() => router.back()}>
                     <Ionicons name="arrow-back" size={24} color={Colors.white} style={styles.icon} />
                 </TouchableOpacity>
                 <Text style={styles.headerText}>Profile</Text>
@@ -49,7 +44,7 @@ const ProductionPage = () => {
                 <Text style={styles.profileName}>CD Production House</Text>
                 <Text style={styles.profileBio}>
                     Photoshoot | Series | Modeling | Fashion | Drama
-                  
+
                 </Text>
                 <Text style={styles.profileLink}>www.userlink.com</Text>
 
@@ -99,7 +94,7 @@ const ProductionPage = () => {
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>My Portfolio</Text>
                 <View style={styles.buttonRow}>
-                <TouchableOpacity
+                    <TouchableOpacity
                         style={[
                             styles.portfolioButton,
                             selectedButton === 'Brands' ? styles.selectedButton : null,
@@ -146,8 +141,8 @@ const ProductionPage = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.imageGrid}>
-             
-                
+
+
                     <Image source={require('../assets/images/production/team1.png')} style={styles.gridImage} />
                     <Image source={require('../assets/images/production/team2.png')} style={styles.gridImage} />
                     <Image source={require('../assets/images/production/team3.png')} style={styles.gridImage} />
@@ -309,7 +304,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     portfolioButton: {
-        
+
         paddingVertical: 5,
         paddingHorizontal: 10,
         borderRadius: 5,
